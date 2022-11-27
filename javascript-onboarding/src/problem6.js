@@ -1,8 +1,11 @@
 function problem6(forms) {
-  const duplicatedWordUserEmails = getDuplicatedWordUserEmails(
-    setDividedWords(forms, new Map())
-  );
-  return sortArray(duplicatedWordUserEmails);
+  if (isValidateForms(forms)) {
+    const duplicatedWordUserEmails = getDuplicatedWordUserEmails(
+      setDividedWords(forms, new Map())
+    );
+    return sortArray(duplicatedWordUserEmails);
+  }
+  return -1;
 }
 
 const sortArray = (array) => {
@@ -36,6 +39,44 @@ const setDividedWords = (forms, dividedWords) => {
     }
   });
   return dividedWords;
+};
+
+const isValidateForms = (forms) => {
+  if (forms.length < 1 || forms.length > 10000) {
+    return false;
+  }
+  for (let index = 0; index < forms.length; index += 1) {
+    const [email, nickName] = forms[index];
+    if (!isValidateEmail(email)) {
+      return false;
+    }
+    if (!isValidateNickName(nickName)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const isValidateEmail = (email) => {
+  if (email.length < 11 || email.length > 19) {
+    return false;
+  }
+  if (
+    !(email.includes("@email.com") && email.match(/@email.com/g).length === 1)
+  ) {
+    return false;
+  }
+  return true;
+};
+
+const isValidateNickName = (nickName) => {
+  if (nickName.length < 1 || nickName.length > 19) {
+    return false;
+  }
+  if (!/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(nickName)) {
+    return false;
+  }
+  return true;
 };
 
 module.exports = problem6;
