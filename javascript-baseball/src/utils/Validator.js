@@ -1,23 +1,23 @@
 const Validator = {
-  isUserNumbers(numbers) {
+  userNumbers(numbers) {
     if (!Number(numbers)) {
-      return false;
+      throw new Error('[ERROR] 숫자가 아닙니다.');
     }
     if (numbers.includes('0')) {
-      return false;
+      throw new Error('[ERROR] 0이 포함되어 있으면 안됩니다.');
     }
     if (new Set(numbers).size !== numbers.length) {
-      return false;
+      throw new Error('[ERROR] 중복된 수가 존재하면 안됩니다.');
     }
     if (numbers.length !== 3) {
-      return false;
+      throw new Error('[ERROR] 길이가 3이 아닙니다.');
     }
     return true;
   },
 
-  isFinalCommand(command) {
+  finalCommand(command) {
     if (command !== '1' && command !== '2') {
-      return false;
+      throw new Error('[ERROR] 1(재시작) 또는 2(종료)를 입력해야 합니다.');
     }
     return true;
   },
