@@ -16,6 +16,16 @@ class BaseballGameModel {
     });
     return strike;
   }
+
+  getBall() {
+    let matchCount = 0;
+    this.#computerNumbers.split('').forEach((computerNumber) => {
+      if (this.#userNumbers.includes(computerNumber)) {
+        matchCount += 1;
+      }
+    });
+    return matchCount - this.getStrike();
+  }
 }
 
 module.exports = BaseballGameModel;
