@@ -34,6 +34,14 @@ class BaseballGameModel {
   setUserNumbers(numbers) {
     this.#userNumbers = numbers;
   }
+
+  getUserNumbers() {
+    return this.#userNumbers;
+  }
+
+  getComputerNumbers() {
+    return this.#computerNumbers;
+  }
 }
 
 module.exports = BaseballGameModel;
