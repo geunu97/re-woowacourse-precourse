@@ -14,6 +14,13 @@ const Validator = {
     }
     return true;
   },
+
+  isFinalCommand(command) {
+    if (command !== '1' && command !== '2') {
+      return false;
+    }
+    return true;
+  },
 };
 
 module.exports = Validator;

@@ -10,6 +10,15 @@ const InputView = {
       callback(numbers);
     });
   },
+
+  readFinalCommand(callback) {
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (command) => {
+      if (!Validator.isFinalCommand(command)) {
+        throw new Error('[ERROR] 1(재시작) 또는 2(종료)를 입력해야 합니다..');
+      }
+      callback(command);
+    });
+  },
 };
 
 module.exports = InputView;
