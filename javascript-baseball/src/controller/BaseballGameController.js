@@ -19,8 +19,10 @@ class BaseballGameController {
       this.#baseballGameModel = new BaseballGameModel(computerNumbers, userNumbers);
       console.log(computerNumbers, '컴퓨터');
       console.log(userNumbers, '사용자');
-      console.log(this.#baseballGameModel.getStrike());
-      console.log(this.#baseballGameModel.getBall());
+      OutputView.printStrikeAndBall(
+        this.#baseballGameModel.getBall(),
+        this.#baseballGameModel.getStrike(),
+      );
     });
   }
 }
