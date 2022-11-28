@@ -1,6 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 
-const randomNumberGenerator = {
+const RandomNumberGenerator = {
   generate() {
     return Random.pickNumberInRange(1, 9);
   },
@@ -17,4 +17,4 @@ const randomNumberGenerator = {
   },
 };
 
-module.exports = randomNumberGenerator;
+module.exports = RandomNumberGenerator;
