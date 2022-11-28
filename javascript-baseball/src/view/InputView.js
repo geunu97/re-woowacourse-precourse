@@ -4,7 +4,7 @@ const Validator = require('../utils/Validator');
 const InputView = {
   readUserNumbers(callback) {
     Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
-      if (Validator.userNumbers(numbers)) {
+      if (Validator.userNumber(numbers)) {
         callback(numbers);
       }
     });

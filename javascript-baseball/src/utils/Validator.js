@@ -1,5 +1,5 @@
 const Validator = {
-  userNumbers(numbers) {
+  userNumber(numbers) {
     if (!Number(numbers)) {
       throw new Error('[ERROR] 숫자가 아닙니다.');
     }
