@@ -6,24 +6,38 @@ const OutputView = require('../view/OutputView');
 class BaseballGameController {
   #baseballGameModel;
 
-  start() {
+  startGame() {
     OutputView.printStart();
-    this.makeBaseballGame();
+    this.makeGame();
   }
 
-  makeBaseballGame() {
-    const computerNumbers = randomNumberGenerator.generateComputerNumbers(
-      randomNumberGenerator.generate,
-    );
+  makeGame() {
     InputView.readUserNumbers((userNumbers) => {
-      this.#baseballGameModel = new BaseballGameModel(computerNumbers, userNumbers);
-      console.log(computerNumbers, '컴퓨터');
-      console.log(userNumbers, '사용자');
-      OutputView.printStrikeAndBall(
-        this.#baseballGameModel.getBall(),
-        this.#baseballGameModel.getStrike(),
+      this.#baseballGameModel = new BaseballGameModel(
+        randomNumberGenerator.generateComputerNumbers(randomNumberGenerator.generate),
+        userNumbers,
       );
+      this.resultGame();
     });
+  }
+
+  againInput() {
+    InputView.readUserNumbers((userNumbers) => {
+      this.#baseballGameModel.setUserNumbers(userNumbers);
+      this.resultGame();
+    });
+  }
+
+  resultGame() {
+    OutputView.printStrikeAndBall(
+      this.#baseballGameModel.getBall(),
+      this.#baseballGameModel.getStrike(),
+    );
+    if (!this.#baseballGameModel.isCompletion()) {
+      this.againInput();
+      return;
+    }
+    console.log('3스트라이크');
   }
 }
 

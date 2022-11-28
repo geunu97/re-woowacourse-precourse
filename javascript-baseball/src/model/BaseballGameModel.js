@@ -3,6 +3,7 @@ class BaseballGameModel {
   #userNumbers;
 
   constructor(computerNumbers, userNumbers) {
+    console.log(computerNumbers);
     this.#computerNumbers = computerNumbers;
     this.#userNumbers = userNumbers;
   }
@@ -25,6 +26,14 @@ class BaseballGameModel {
       }
     });
     return matchCount - this.getStrike();
+  }
+
+  isCompletion() {
+    return this.getStrike() === 3;
+  }
+
+  setUserNumbers(numbers) {
+    this.#userNumbers = numbers;
   }
 }
 
