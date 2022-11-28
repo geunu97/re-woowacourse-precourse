@@ -3,7 +3,6 @@ class BaseballGameModel {
   #userNumbers;
 
   constructor(computerNumbers, userNumbers) {
-    console.log(computerNumbers);
     this.#computerNumbers = computerNumbers;
     this.#userNumbers = userNumbers;
   }
