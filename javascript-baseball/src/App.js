@@ -1,5 +1,10 @@
+const BaseballGameController = require("./controller/BaseballGameController");
+
 class App {
-  play() {}
+  play() {
+    const baseballGameController = new BaseballGameController();
+    baseballGameController.start();
+  }
 }
 
 module.exports = App;
