@@ -7,7 +7,7 @@ const InputView = {
       if (!Validator.isUserNumbers(numbers)) {
         throw new Error('[ERROR] 1부터 9까지 서로 다른 3자리 수로 이루어져야 합니다.');
       }
-      callback(number);
+      callback(numbers);
     });
   },
 };
