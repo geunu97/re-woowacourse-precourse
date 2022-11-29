@@ -1,0 +1,29 @@
+{
+  "name": "javascript-subway-map",
+  "version": "1.0.0",
+  "description": "우아한테크코스 지하철 노선도 미션",
+  "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.6"
+  },
+  "devDependencies": {
+    "jest": "^29.0.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geunu97/re-woowacourse-precourse.git"
+  },
+  "keywords": [],
+  "author": "woowacourse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geunu97/re-woowacourse-precourse/issues"
+  },
+  "engineStrict": true,
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0"
+  }
+}
