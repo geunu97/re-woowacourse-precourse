@@ -1,23 +1,30 @@
+const {
+  ERROR_MESSAGE_USER_NUMBERS,
+  ERROR_MESSAGE_FINAL_COMMAND,
+  COMMAND,
+  GAME_RULE,
+} = require('./Constant');
+
 const Validator = {
   userNumber(numbers) {
     if (!Number(numbers)) {
-      throw new Error('[ERROR] 숫자가 아닙니다.');
+      throw new Error(ERROR_MESSAGE_USER_NUMBERS.TYPE);
     }
     if (numbers.includes('0')) {
-      throw new Error('[ERROR] 0이 포함되어 있으면 안됩니다.');
+      throw new Error(ERROR_MESSAGE_USER_NUMBERS.INCLUDE_ZERO);
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error('[ERROR] 중복된 수가 존재하면 안됩니다.');
+      throw new Error(ERROR_MESSAGE_USER_NUMBERS.DUPLICATE);
     }
-    if (numbers.length !== 3) {
-      throw new Error('[ERROR] 길이가 3이 아닙니다.');
+    if (numbers.length !== GAME_RULE.LENGTH) {
+      throw new Error(ERROR_MESSAGE_USER_NUMBERS.LENGTH);
     }
     return true;
   },
 
   finalCommand(command) {
-    if (command !== '1' && command !== '2') {
-      throw new Error('[ERROR] 1(재시작) 또는 2(종료)를 입력해야 합니다.');
+    if (command !== COMMAND.REPLAY && command !== COMMAND.END) {
+      throw new Error(ERROR_MESSAGE_FINAL_COMMAND.COMMAND);
     }
     return true;
   },

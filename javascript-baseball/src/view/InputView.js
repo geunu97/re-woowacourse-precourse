@@ -1,9 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { INPUT_MESSAGE } = require('../utils/Constant');
 const Validator = require('../utils/Validator');
 
 const InputView = {
   readUserNumbers(callback) {
-    Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
+    Console.readLine(INPUT_MESSAGE.USER_NUMBERS, (numbers) => {
       if (Validator.userNumber(numbers)) {
         callback(numbers);
       }
@@ -11,7 +12,7 @@ const InputView = {
   },
 
   readFinalCommand(callback) {
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (command) => {
+    Console.readLine(INPUT_MESSAGE.FINAL_COMMAND, (command) => {
       if (Validator.finalCommand(command)) {
         callback(command);
       }

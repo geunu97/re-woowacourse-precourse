@@ -1,3 +1,5 @@
+const { GAME_RULE } = require('../utils/Constant');
+
 class BaseballGameModel {
   #computerNumbers;
   #userNumbers;
@@ -28,7 +30,7 @@ class BaseballGameModel {
   }
 
   isCompletion() {
-    return this.getStrike() === 3;
+    return this.getStrike() === GAME_RULE.COMPLETE_STRIKE_COUNT;
   }
 
   setUserNumbers(numbers) {

@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BaseballGameModel = require('../model/BaseballGameModel');
+const { COMMAND } = require('../utils/Constant');
 const RandomNumberGenerator = require('../utils/RandomNumberGenerator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -44,7 +45,7 @@ class BaseballGameController {
   completeGame() {
     OutputView.printComplete();
     InputView.readFinalCommand((command) => {
-      if (command === '1') {
+      if (command === COMMAND.REPLAY) {
         this.makeGame();
         return;
       }
