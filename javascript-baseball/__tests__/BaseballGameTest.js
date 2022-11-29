@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 const BaseballGameModel = require('../src/model/BaseballGameModel');
-const RandomNumberGenerator = require('../src/utils/RandomNumberGenerator');
+const ComputerNumberMaker = require('../src/utils/ComputerNumberMaker');
 
 const mockGenerator = (numbers) =>
   numbers.reduce((acc, currentNumber) => acc.mockReturnValueOnce(currentNumber), jest.fn());
@@ -8,7 +8,7 @@ const mockGenerator = (numbers) =>
 describe('야구 게임 테스트', () => {
   test('1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 생성한다.', () => {
     const generateRandomNumber = mockGenerator([1, 2, 2, 3, 1, 4]);
-    const computerNumber = RandomNumberGenerator.generateComputerNumbers(generateRandomNumber);
+    const computerNumber = ComputerNumberMaker.make(generateRandomNumber);
 
     expect(computerNumber).toEqual('123');
   });

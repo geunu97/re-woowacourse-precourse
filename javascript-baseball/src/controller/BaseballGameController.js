@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BaseballGameModel = require('../model/BaseballGameModel');
+const ComputerNumberMaker = require('../utils/ComputerNumberMaker');
 const { COMMAND } = require('../utils/Constant');
 const RandomNumberGenerator = require('../utils/RandomNumberGenerator');
 const InputView = require('../view/InputView');
@@ -16,7 +17,7 @@ class BaseballGameController {
   makeGame() {
     InputView.readUserNumbers((userNumbers) => {
       this.#baseballGameModel = new BaseballGameModel(
-        RandomNumberGenerator.generateComputerNumbers(RandomNumberGenerator.generate),
+        ComputerNumberMaker.make(RandomNumberGenerator.generate),
         userNumbers,
       );
       this.resultGame();
