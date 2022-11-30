@@ -1,15 +1,26 @@
 const RandomUniqueNumbersGenerator = require('../RandomUniqueNumbersGenerator');
 
 class User {
+  #purchaseMoney;
   #LottoNumbers = [];
 
-  purchaseLottoTimes(times) {
-    this.#LottoNumbers = Array.from({ length: times }, () => this.purchaseLotto());
+  constructor(purchaseMoney) {
+    this.#purchaseMoney = purchaseMoney;
+  }
+
+  purchaseLottoTimes() {
+    this.#LottoNumbers = Array.from({ length: this.#purchaseMoney / 1000 }, () =>
+      this.purchaseLotto(),
+    );
   }
 
   purchaseLotto() {
     const { generate, sort, convertType } = RandomUniqueNumbersGenerator;
     return convertType(sort(generate()));
+  }
+
+  getPurchaseMoney() {
+    return this.#purchaseMoney;
   }
 
   getLottoNumbers() {
