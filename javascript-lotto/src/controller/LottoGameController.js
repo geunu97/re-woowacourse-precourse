@@ -15,11 +15,11 @@ class LottoGameController {
     InputView.readPurchaseMoney((purchaseMoney) => {
       this.#user.purchaseLottoTimes(Number(purchaseMoney) / 1000);
       OutputView.printLottoNumbers(this.#user.getLottoNumbers());
-      this.winningNumbers();
+      this.makeGame();
     });
   }
 
-  winningNumbers() {
+  makeGame() {
     InputView.readWinningNumbers((winningNumbers) => {
       this.#lotto = new Lotto(winningNumbers);
       this.bonusNumber();
@@ -29,6 +29,8 @@ class LottoGameController {
   bonusNumber() {
     InputView.readBonusNumber((bonusNumber) => {
       InputValidator.bonusNumber(this.#lotto.getNumbers(), bonusNumber);
+      this.#lotto.updateNumbers(bonusNumber);
+      console.log(this.#lotto.getMatchingCount(this.#user.getLottoNumbers()));
 
       //
     });
