@@ -12,6 +12,13 @@ class LottoGameController {
     InputView.readPurchaseMoney((purchaseMoney) => {
       this.#user.purchaseLottoTimes(Number(purchaseMoney) / 1000);
       OutputView.printLottoNumbers(this.#user.getLottoNumbers());
+      this.winningNumbers();
+    });
+  }
+
+  winningNumbers() {
+    InputView.readWinningNumbers((winningNumbers) => {
+      //
     });
   }
 }
