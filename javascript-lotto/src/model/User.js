@@ -8,16 +8,8 @@ class User {
   }
 
   purchaseLotto() {
-    return this.sortNumbers(RandomUniqueNumbersGenerator.generate());
-  }
-
-  sortNumbers(numbers) {
-    return numbers.sort((prevNumber, nextNumber) => {
-      if (prevNumber > nextNumber) {
-        return 1;
-      }
-      return -1;
-    });
+    const { generate, sort, convertType } = RandomUniqueNumbersGenerator;
+    return convertType(sort(generate()));
   }
 
   getLottoNumbers() {
