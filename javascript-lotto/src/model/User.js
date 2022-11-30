@@ -1,4 +1,3 @@
-const Lotto = require('../Lotto');
 const RandomUniqueNumbersGenerator = require('../RandomUniqueNumbersGenerator');
 
 class User {
@@ -9,12 +8,7 @@ class User {
   }
 
   purchaseLotto() {
-    const lotto = new Lotto(RandomUniqueNumbersGenerator.generate());
-    return this.sortNumbers(lotto.getNumbers());
-  }
-
-  getLottoNumbers() {
-    return this.#LottoNumbers;
+    return this.sortNumbers(RandomUniqueNumbersGenerator.generate());
   }
 
   sortNumbers(numbers) {
@@ -24,6 +18,10 @@ class User {
       }
       return -1;
     });
+  }
+
+  getLottoNumbers() {
+    return this.#LottoNumbers;
   }
 }
 
