@@ -6,12 +6,15 @@ class User {
 
   purchaseLottoTimes(times) {
     this.#LottoNumbers = Array.from({ length: times }, () => this.purchaseLotto());
-    console.log(this.#LottoNumbers);
   }
 
   purchaseLotto() {
     const lotto = new Lotto(RandomUniqueNumbersGenerator.generate());
     return lotto.getNumbers();
+  }
+
+  getLottoNumbers() {
+    return this.#LottoNumbers;
   }
 }
 
