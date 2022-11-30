@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const Lotto = require('../Lotto');
 const User = require('../model/User');
 const ProfitCalculator = require('../ProfitCalculator');
@@ -48,6 +49,11 @@ class LottoGameController {
     const profit = ProfitCalculator.calculate(ranks);
     const profitRate = ProfitCalculator.calculateRate(this.#user.getPurchaseMoney(), profit);
     OutputView.printProfitRate(profitRate);
+    this.end();
+  }
+
+  end() {
+    Console.close();
   }
 }
 
