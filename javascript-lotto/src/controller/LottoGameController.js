@@ -1,8 +1,11 @@
+const Lotto = require('../Lotto');
+const InputValidator = require('../utils/InputValidator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class LottoGameController {
   #user;
+  #lotto;
 
   constructor(user) {
     this.#user = user;
@@ -18,12 +21,15 @@ class LottoGameController {
 
   winningNumbers() {
     InputView.readWinningNumbers((winningNumbers) => {
+      this.#lotto = new Lotto(winningNumbers);
       this.bonusNumber();
     });
   }
 
   bonusNumber() {
     InputView.readBonusNumber((bonusNumber) => {
+      InputValidator.bonusNumber(this.#lotto.getNumbers(), bonusNumber);
+
       //
     });
   }

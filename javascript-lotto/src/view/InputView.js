@@ -10,15 +10,15 @@ const InputView = {
   },
 
   readWinningNumbers(callback) {
-    Console.readLine('\n당첨 번호를 입력해 주세요.\n', (winningNumbers) => {
-      InputValidator.winningNumbers(winningNumbers.split(','));
+    Console.readLine('\n당첨 번호를 입력해 주세요.\n', (numbers) => {
+      const winningNumbers = numbers.split(',');
+      InputValidator.winningNumbers(winningNumbers);
       callback(winningNumbers);
     });
   },
 
   readBonusNumber(callback) {
     Console.readLine('\n보너스 번호를 입력해 주세요.\n', (bonusNumber) => {
-      InputValidator.bonusNumber(bonusNumber);
       callback(bonusNumber);
     });
   },

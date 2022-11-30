@@ -15,7 +15,11 @@ const InputValidator = {
     });
   },
 
-  bonusNumber(number) {},
+  bonusNumber(winningNumbers, bonusNumber) {
+    Validator.type(bonusNumber);
+    Validator.range(bonusNumber);
+    Validator.duplicate([...winningNumbers, bonusNumber]);
+  },
 };
 
 module.exports = InputValidator;
