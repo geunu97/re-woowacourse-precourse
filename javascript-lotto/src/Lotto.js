@@ -5,6 +5,35 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getLanks(matchingCounts) {
+    const ranks = Array.from({ length: 5 }, () => 0);
+    matchingCounts.forEach((matchingCount) => {
+      const rank = this.getLank(matchingCount);
+      if (rank) {
+        ranks[rank] += 1;
+      }
+    });
+    return ranks;
+  }
+
+  getLank([winningCount, bonusCount]) {
+    if (winningCount === 6) {
+      return 0;
+    }
+    if (winningCount === 5 && bonusCount) {
+      return 1;
+    }
+    if (winningCount === 5) {
+      return 2;
+    }
+    if (winningCount === 4) {
+      return 3;
+    }
+    if (winningCount === 3) {
+      return 4;
+    }
+  }
+
   getMatchingCount(userAllNumbers) {
     const count = [];
     userAllNumbers.forEach((userNumbers) => {

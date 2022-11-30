@@ -30,7 +30,9 @@ class LottoGameController {
     InputView.readBonusNumber((bonusNumber) => {
       InputValidator.bonusNumber(this.#lotto.getNumbers(), bonusNumber);
       this.#lotto.updateNumbers(bonusNumber);
-      console.log(this.#lotto.getMatchingCount(this.#user.getLottoNumbers()));
+      const asd = this.#lotto.getMatchingCount(this.#user.getLottoNumbers());
+
+      console.log(this.#lotto.getLanks(asd));
 
       //
     });
