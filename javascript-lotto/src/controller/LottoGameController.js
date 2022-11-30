@@ -12,30 +12,36 @@ class LottoGameController {
   }
 
   start() {
+    this.InputPurchaseMoney();
+  }
+
+  InputPurchaseMoney() {
     InputView.readPurchaseMoney((purchaseMoney) => {
       this.#user.purchaseLottoTimes(Number(purchaseMoney) / 1000);
       OutputView.printLottoNumbers(this.#user.getLottoNumbers());
-      this.makeGame();
+      this.InputWinningNumbers();
     });
   }
 
-  makeGame() {
+  InputWinningNumbers() {
     InputView.readWinningNumbers((winningNumbers) => {
       this.#lotto = new Lotto(winningNumbers);
-      this.bonusNumber();
+      this.InputBonusNumber();
     });
   }
 
-  bonusNumber() {
+  InputBonusNumber() {
     InputView.readBonusNumber((bonusNumber) => {
       InputValidator.bonusNumber(this.#lotto.getNumbers(), bonusNumber);
       this.#lotto.updateNumbers(bonusNumber);
-      const asd = this.#lotto.getMatchingCount(this.#user.getLottoNumbers());
-
-      console.log(this.#lotto.getLanks(asd));
-
-      //
+      this.result();
     });
+  }
+
+  result() {
+    const matchingCount = this.#lotto.getMatchingCount(this.#user.getLottoNumbers());
+    const ranks = this.#lotto.getLanks(matchingCount);
+    OutputView.printStatistics(ranks);
   }
 }
 
