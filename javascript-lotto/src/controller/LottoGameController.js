@@ -1,13 +1,17 @@
 const InputView = require('../view/InputView');
-const User = require('../model/User');
 const OutputView = require('../view/OutputView');
 
 class LottoGameController {
+  #user;
+
+  constructor(user) {
+    this.#user = user;
+  }
+
   start() {
     InputView.readPurchaseMoney((purchaseMoney) => {
-      const user = new User();
-      user.purchaseLottoTimes(Number(purchaseMoney) / 1000);
-      OutputView.printLottoNumbers(user.getLottoNumbers());
+      this.#user.purchaseLottoTimes(Number(purchaseMoney) / 1000);
+      OutputView.printLottoNumbers(this.#user.getLottoNumbers());
     });
   }
 }
