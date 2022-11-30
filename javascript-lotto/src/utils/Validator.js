@@ -1,30 +1,32 @@
 const Validator = {
-  purchaseMoney(money) {
-    if (!Number(money)) {
-      throw new Error('[ERROR] 구입금액이 숫자가 아닙니다.');
+  type(value) {
+    if (!Number(value)) {
+      throw new Error('[ERROR] 숫자가 아닙니다.');
     }
-    if (Number(money) % 1000 !== 0) {
-      throw new Error('[ERROR] 구입금액이 1000원 단위가 아닙니다.');
-    }
-    return true;
   },
 
-  winningNumbers(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 당첨번호가 6개가 아닙니다.');
+  range(value) {
+    if (Number(value) < 1 || Number(value) > 45) {
+      throw new Error('1에서 45사이의 숫자가 아닙니다.');
     }
-    if (new Set(numbers).size !== numbers.length) {
-      throw new Error('[ERROR] 당첨번호에 중복된 수가 존재하면 안됩니다.');
+  },
+
+  length(value, length) {
+    if (value.length !== length) {
+      throw new Error(`[ERROR] 길이가 ${length}이 아닙니다.`);
     }
-    numbers.forEach((number) => {
-      if (!Number(number)) {
-        throw new Error('[ERROR] 당첨번호가 숫자가 아닙니다.');
-      }
-      if (Number(number) < 1 || Number(number) > 45) {
-        throw new Error('당첨번호가 1에서 45사이의 숫자가 아닙니다.');
-      }
-    });
-    return true;
+  },
+
+  duplicate(value) {
+    if (new Set(value).size !== value.length) {
+      throw new Error('[ERROR] 중복된 수가 존재하면 안됩니다.');
+    }
+  },
+
+  unit(value, unit) {
+    if (Number(value) % unit !== 0) {
+      throw new Error('[ERROR] 1000원 단위가 아닙니다.');
+    }
   },
 };
 

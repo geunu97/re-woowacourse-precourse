@@ -18,6 +18,12 @@ class LottoGameController {
 
   winningNumbers() {
     InputView.readWinningNumbers((winningNumbers) => {
+      this.bonusNumber();
+    });
+  }
+
+  bonusNumber() {
+    InputView.readBonusNumber((bonusNumber) => {
       //
     });
   }
