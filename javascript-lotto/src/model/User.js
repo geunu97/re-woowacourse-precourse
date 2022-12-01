@@ -1,4 +1,5 @@
 const RandomUniqueNumbersGenerator = require('../RandomUniqueNumbersGenerator');
+const { GAME_RULE } = require('../utils/Constant');
 
 class User {
   #purchaseMoney;
@@ -9,7 +10,7 @@ class User {
   }
 
   purchaseLottoTimes() {
-    this.#LottoNumbers = Array.from({ length: this.#purchaseMoney / 1000 }, () =>
+    this.#LottoNumbers = Array.from({ length: this.#purchaseMoney / GAME_RULE.MONEY_UNIT }, () =>
       this.purchaseLotto(),
     );
   }

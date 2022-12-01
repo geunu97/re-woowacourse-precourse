@@ -1,3 +1,5 @@
+const { GAME_RULE, MACHING_COUNT } = require('./utils/Constant');
+
 class Lotto {
   #numbers;
 
@@ -6,7 +8,7 @@ class Lotto {
   }
 
   getLanks(matchingCounts) {
-    const ranks = Array.from({ length: 5 }, () => 0);
+    const ranks = Array.from({ length: GAME_RULE.NUMBERS_LENGTH - 1 }, () => 0);
     matchingCounts.forEach((matchingCount) => {
       const rank = this.getLank(matchingCount);
       if (rank === Number(rank)) {
@@ -17,19 +19,19 @@ class Lotto {
   }
 
   getLank([winningCount, bonusCount]) {
-    if (winningCount === 6) {
+    if (winningCount === MACHING_COUNT.FIRST_PLACE) {
       return 0;
     }
-    if (winningCount === 5 && bonusCount) {
+    if (winningCount === MACHING_COUNT.SECOND_PLACE && bonusCount) {
       return 1;
     }
-    if (winningCount === 5) {
+    if (winningCount === MACHING_COUNT.THIRD_PLACE) {
       return 2;
     }
-    if (winningCount === 4) {
+    if (winningCount === MACHING_COUNT.FOURTH_PLACE) {
       return 3;
     }
-    if (winningCount === 3) {
+    if (winningCount === MACHING_COUNT.FIFTH_PLACE) {
       return 4;
     }
   }
@@ -44,7 +46,7 @@ class Lotto {
 
   matchWinningNumbers(userNumbers) {
     let count = 0;
-    this.#numbers.slice(0, 6).forEach((winningNumber) => {
+    this.#numbers.slice(0, GAME_RULE.NUMBERS_LENGTH).forEach((winningNumber) => {
       if (userNumbers.includes(winningNumber)) {
         count += 1;
       }
@@ -53,7 +55,7 @@ class Lotto {
   }
 
   matchBonusNumber(userNumbers) {
-    if (userNumbers.includes(this.#numbers[6])) {
+    if (userNumbers.includes(this.#numbers[GAME_RULE.NUMBERS_LENGTH])) {
       return 1;
     }
     return 0;

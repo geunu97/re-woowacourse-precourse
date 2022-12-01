@@ -1,8 +1,13 @@
 const { Random } = require('@woowacourse/mission-utils');
+const { GAME_RULE } = require('./utils/Constant');
 
 const RandomUniqueNumbersGenerator = {
   generate() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(
+      GAME_RULE.MIN_NUMBER,
+      GAME_RULE.MAX_NUMBER,
+      GAME_RULE.NUMBERS_LENGTH,
+    );
   },
 
   sort(numbers) {

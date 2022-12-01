@@ -1,10 +1,11 @@
 /* eslint-disable max-lines-per-function */
+const { ERROR_MESSAGE_HEADER } = require('../src/utils/Constant');
 const InputValidator = require('../src/utils/InputValidator');
 
 const runException = (validatorMethod, inputData) => {
   expect(() => {
     validatorMethod(inputData);
-  }).toThrow();
+  }).toThrow(ERROR_MESSAGE_HEADER);
 };
 
 describe('사용자 입력 형식 예외 발생 테스트', () => {
@@ -64,7 +65,7 @@ describe('사용자 입력 형식 예외 발생 테스트', () => {
 
     expect(() => {
       InputValidator.bonusNumber([], bonusNumber);
-    }).toThrow();
+    }).toThrow('[ERROR]');
   });
 
   test('보너스 번호 형식은 46이상의 숫자가 존재하면 예외가 발생한다.', () => {
@@ -72,7 +73,7 @@ describe('사용자 입력 형식 예외 발생 테스트', () => {
 
     expect(() => {
       InputValidator.bonusNumber([], bonusNumber);
-    }).toThrow();
+    }).toThrow('[ERROR]');
   });
 
   test('보너스 번호는 당첨 번호와 중복되면 예외가 발생한다.', () => {
@@ -81,6 +82,6 @@ describe('사용자 입력 형식 예외 발생 테스트', () => {
 
     expect(() => {
       InputValidator.bonusNumber(winningNumbers, bonusNumber);
-    }).toThrow();
+    }).toThrow('[ERROR]');
   });
 });

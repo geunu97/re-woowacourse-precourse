@@ -1,24 +1,25 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { OUTPUT_MESSAGE } = require('../utils/Constant');
 
 const OutputView = {
   printLottoNumbers(lotto) {
-    Console.print(`\n${lotto.length}개를 구매했습니다.`);
+    Console.print(OUTPUT_MESSAGE.LOTTO_LENGTH(lotto.length));
     lotto.forEach((numbers) => {
-      Console.print(`[${numbers.join(', ')}]`);
+      Console.print(OUTPUT_MESSAGE.LOTTO_NUMBERS(numbers));
     });
   },
 
   printStatistics([firstPlace, secondPlace, thirdPlace, fourthPlace, fifthPlace]) {
-    Console.print('\n당첨 통계\n---');
-    Console.print(`3개 일치 (5,000원) - ${fifthPlace}개`);
-    Console.print(`4개 일치 (50,000원) - ${fourthPlace}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${thirdPlace}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${secondPlace}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${firstPlace}개`);
+    Console.print(OUTPUT_MESSAGE.STATISTICS);
+    Console.print(OUTPUT_MESSAGE.FIFTH_PLACE(fifthPlace));
+    Console.print(OUTPUT_MESSAGE.FOURTH_PLACE(fourthPlace));
+    Console.print(OUTPUT_MESSAGE.THIRD_PLACE(thirdPlace));
+    Console.print(OUTPUT_MESSAGE.SECOND_PLACE(secondPlace));
+    Console.print(OUTPUT_MESSAGE.FIRST_PLACE(firstPlace));
   },
 
   printProfitRate(profitRate) {
-    Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
+    Console.print(OUTPUT_MESSAGE.PROFIT(profitRate));
   },
 };
 

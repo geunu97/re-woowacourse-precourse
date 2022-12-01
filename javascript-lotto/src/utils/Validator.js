@@ -1,31 +1,33 @@
+const { GAME_RULE, ERROR_MESSAGE } = require('./Constant');
+
 const Validator = {
   type(value) {
     if (!Number(value)) {
-      throw new Error('[ERROR] 숫자가 아닙니다.');
+      throw new Error(ERROR_MESSAGE.TYPE);
     }
   },
 
   range(value) {
-    if (Number(value) < 1 || Number(value) > 45) {
-      throw new Error('1에서 45사이의 숫자가 아닙니다.');
+    if (Number(value) < GAME_RULE.MIN_NUMBER || Number(value) > GAME_RULE.MAX_NUMBER) {
+      throw new Error(ERROR_MESSAGE.RANGE);
     }
   },
 
   length(value, length) {
     if (value.length !== length) {
-      throw new Error(`[ERROR] 길이가 ${length}이 아닙니다.`);
+      throw new Error(ERROR_MESSAGE.LENGTH(length));
     }
   },
 
   duplicate(value) {
     if (new Set(value).size !== value.length) {
-      throw new Error('[ERROR] 중복된 수가 존재하면 안됩니다.');
+      throw new Error(ERROR_MESSAGE.DUPLICATE);
     }
   },
 
   unit(value, unit) {
     if (Number(value) % unit !== 0) {
-      throw new Error('[ERROR] 1000원 단위가 아닙니다.');
+      throw new Error(ERROR_MESSAGE.UNIT);
     }
   },
 };
