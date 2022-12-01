@@ -9,7 +9,7 @@ class Lotto {
     const ranks = Array.from({ length: 5 }, () => 0);
     matchingCounts.forEach((matchingCount) => {
       const rank = this.getLank(matchingCount);
-      if (rank) {
+      if (rank === Number(rank)) {
         ranks[rank] += 1;
       }
     });
