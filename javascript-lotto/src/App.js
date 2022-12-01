@@ -1,9 +1,8 @@
 const LottoGameController = require('./controller/LottoGameController');
-const User = require('./model/User');
 
 class App {
   play() {
-    const lottoGameController = new LottoGameController(new User());
+    const lottoGameController = new LottoGameController();
     lottoGameController.start();
   }
 }
