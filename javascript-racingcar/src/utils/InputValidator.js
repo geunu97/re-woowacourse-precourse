@@ -6,6 +6,9 @@ const InputValidator = {
       Validator.length(car, 5);
     });
   },
+  tryCount(count) {
+    Validator.type(count);
+  },
 };
 
 module.exports = InputValidator;

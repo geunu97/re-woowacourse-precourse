@@ -16,6 +16,16 @@ const InputView = {
       },
     );
   },
+
+  readTryCount(callback) {
+    Console.readLine('시도할 회수는 몇회인가요?\n', (tryCount) => {
+      if (Exception.isThrow(InputValidator.tryCount, tryCount)) {
+        this.readTryCount(callback);
+        return;
+      }
+      callback(tryCount);
+    });
+  },
 };
 
 module.exports = InputView;
