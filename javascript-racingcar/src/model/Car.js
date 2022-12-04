@@ -6,7 +6,15 @@ class Car {
     this.#name = name;
   }
 
-  // 추가 기능 구현
+  isMovable(randomNumberGenerator) {
+    const randomNumber = randomNumberGenerator();
+    console.log(randomNumber);
+    return randomNumber >= 4;
+  }
+
+  Move() {
+    this.#position += 1;
+  }
 }
 
 module.exports = Car;

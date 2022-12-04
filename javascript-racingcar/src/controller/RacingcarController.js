@@ -9,7 +9,12 @@ class RacingcarController {
     InputView.readCars((cars) => {
       const carInstances = cars.map((car) => new Car(car));
       this.#cars = new Cars(carInstances);
+      this.go();
     });
+  }
+
+  go() {
+    this.#cars.tryMoving();
   }
 
   tryCount() {
