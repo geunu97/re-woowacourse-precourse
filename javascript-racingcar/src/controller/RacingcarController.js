@@ -1,7 +1,7 @@
+const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const Car = require('../model/Car');
-const { Console } = require('@woowacourse/mission-utils');
 const RandomNumberGenerator = require('../RandomNumberGenerator');
 
 class RacingcarController {
@@ -33,7 +33,8 @@ class RacingcarController {
       this.result();
       this.#tryCount -= 1;
     }
-    //종료
+    this.winner();
+    this.end();
   }
 
   move() {
@@ -49,6 +50,28 @@ class RacingcarController {
       OutputView.printResult(car.getState());
     });
     Console.print('');
+  }
+
+  winner() {
+    const cars = [];
+    const positions = [];
+    this.#cars.forEach((car) => {
+      const { name, position } = car.getState();
+      cars.push([name, position]);
+      positions.push(position);
+    });
+    const result = [];
+    const maxPosition = positions.sort()[positions.length - 1];
+    cars.forEach(([name, position]) => {
+      if (position === maxPosition) {
+        result.push(name);
+      }
+    });
+    OutputView.printWinner(result);
+  }
+
+  end() {
+    Console.close();
   }
 }
 
