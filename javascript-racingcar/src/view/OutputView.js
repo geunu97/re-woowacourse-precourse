@@ -1,8 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const OutputView = {
-  printResult({ name, position }) {
-    Console.print(`${name} : ${'-'.repeat(position)}`);
+  printResult(cars) {
+    cars.forEach((car) => {
+      Console.print(`${car.getName()} : ${'-'.repeat(car.getPosition())}`);
+    });
+    Console.print('');
   },
 
   printWinner(winner) {

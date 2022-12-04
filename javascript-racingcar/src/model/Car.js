@@ -16,10 +16,12 @@ class Car {
     this.#position += 1;
   }
 
-  getState() {
-    const name = this.#name;
-    const position = this.#position;
-    return { name, position };
+  getName() {
+    return this.#name;
+  }
+
+  getPosition() {
+    return this.#position;
   }
 }
 
