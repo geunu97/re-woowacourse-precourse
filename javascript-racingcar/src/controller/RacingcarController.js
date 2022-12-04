@@ -1,10 +1,14 @@
 const InputView = require('../view/InputView');
+const Car = require('../model/Car');
+const Cars = require('../model/Cars');
 
 class RacingcarController {
+  #cars;
+
   start() {
     InputView.readCars((cars) => {
-      console.log(cars);
-      this.tryCount();
+      const carInstances = cars.map((car) => new Car(car));
+      this.#cars = new Cars(carInstances);
     });
   }
 
