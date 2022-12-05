@@ -8,7 +8,6 @@ class Car {
 
   isMovable(randomNumberGenerator) {
     const randomNumber = randomNumberGenerator();
-    console.log(this.#name, randomNumber, 99999);
     return randomNumber >= 4;
   }
 
