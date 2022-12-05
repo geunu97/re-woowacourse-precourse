@@ -7,11 +7,10 @@ class Car {
   }
 
   isMovable(randomNumberGenerator) {
-    const randomNumber = randomNumberGenerator();
-    return randomNumber >= 4;
+    return randomNumberGenerator() >= 4;
   }
 
-  Move() {
+  move() {
     this.#position += 1;
   }
 

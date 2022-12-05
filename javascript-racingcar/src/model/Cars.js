@@ -13,7 +13,7 @@ class Cars {
     this.#tryCount -= 1;
     this.#cars.forEach((car) => {
       if (car.isMovable(RandomNumberGenerator.generate)) {
-        car.Move();
+        car.move();
       }
     });
   }
