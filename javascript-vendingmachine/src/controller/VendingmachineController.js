@@ -21,6 +21,12 @@ class VendingmachineController {
 
   asd() {
     InputView.readProducts((products) => {
+      this.aaa();
+    });
+  }
+
+  aaa() {
+    InputView.readUserMoney((money) => {
       //
     });
   }

@@ -19,6 +19,10 @@ const InputValidator = {
       Validator.type(quantity);
     });
   },
+
+  userMoney(money) {
+    Validator.type(money);
+  },
 };
 
 module.exports = InputValidator;

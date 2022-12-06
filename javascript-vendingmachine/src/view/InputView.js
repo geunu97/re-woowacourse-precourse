@@ -27,6 +27,16 @@ const InputView = {
       callback(products);
     });
   },
+
+  readUserMoney(callback) {
+    Console.readLine('\n투입 금액을 입력해 주세요.\n', (money) => {
+      if (Exception.isThrow(InputValidator.userMoney, money)) {
+        this.readUserMoney(callback);
+        return;
+      }
+      callback(money);
+    });
+  },
 };
 
 module.exports = InputView;
