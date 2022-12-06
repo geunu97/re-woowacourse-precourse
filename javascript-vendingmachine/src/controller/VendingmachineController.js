@@ -8,6 +8,10 @@ class VendingmachineController {
   #coin;
 
   start() {
+    this.makeVendingmachine();
+  }
+
+  makeVendingmachine() {
     InputView.readVendingmachineMoney((money) => {
       const vendingmachineCoins = VendingmachineCoinMaker.make(
         money,
@@ -15,17 +19,17 @@ class VendingmachineController {
       );
       this.#coin = new Coin(vendingmachineCoins);
       OutputView.printVendingmachineCoin(this.#coin.getCountingCoins());
-      this.asd();
+      this.inputProducts();
     });
   }
 
-  asd() {
+  inputProducts() {
     InputView.readProducts((products) => {
-      this.aaa();
+      this.inputUserMoney();
     });
   }
 
-  aaa() {
+  inputUserMoney() {
     InputView.readUserMoney((money) => {
       //
     });
