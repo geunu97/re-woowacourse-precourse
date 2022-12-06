@@ -5,7 +5,7 @@ class Coin {
     this.#amount = amount;
   }
 
-  count() {
+  getCountingCoins() {
     const count = Array.from({ length: 4 }, () => 0);
     [500, 100, 50, 10].forEach((coin, index) => {
       this.#amount.forEach((amount) => {

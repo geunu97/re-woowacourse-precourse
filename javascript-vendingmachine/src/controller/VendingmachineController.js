@@ -2,6 +2,7 @@ const VendingmachineCoinMaker = require('../VendingmachineCoinMaker');
 const InputView = require('../view/InputView');
 const RandomNumberInListGenerator = require('../RandomNumberInListGenerator');
 const Coin = require('../model/Coin');
+const OutputView = require('../view/OutputView');
 
 class VendingmachineController {
   #coin;
@@ -13,7 +14,7 @@ class VendingmachineController {
         RandomNumberInListGenerator.generate,
       );
       this.#coin = new Coin(vendingmachineCoins);
-      console.log(this.#coin.count());
+      OutputView.printVendingmachineCoin(this.#coin.getCountingCoins());
     });
   }
 }
