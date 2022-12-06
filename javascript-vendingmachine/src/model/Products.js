@@ -6,4 +6,4 @@ class Products {
   }
 }
 
-module.exprots = Products;
+module.exports = Products;

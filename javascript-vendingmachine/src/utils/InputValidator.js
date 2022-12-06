@@ -23,6 +23,10 @@ const InputValidator = {
   userMoney(money) {
     Validator.type(money);
   },
+
+  purchaseProduct(product) {
+    // 존재하지 않는 상품일 때
+  },
 };
 
 module.exports = InputValidator;

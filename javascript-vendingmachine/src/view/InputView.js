@@ -37,6 +37,16 @@ const InputView = {
       callback(money);
     });
   },
+
+  readPurchaseProduct(callback) {
+    Console.readLine('구매할 상품명을 입력해 주세요.\n', (product) => {
+      if (Exception.isThrow(InputValidator.purchaseProduct, product)) {
+        this.readPurchaseProduct(callback);
+        return;
+      }
+      callback(product);
+    });
+  },
 };
 
 module.exports = InputView;

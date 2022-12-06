@@ -39,6 +39,18 @@ class VendingmachineController {
   inputUserMoney() {
     InputView.readUserMoney((money) => {
       this.#user = new User(money);
+      this.asd();
+    });
+  }
+
+  asd() {
+    OutputView.printRemainingMoney(this.#user.getMoney());
+    this.bbb();
+  }
+
+  bbb() {
+    InputView.readPurchaseProduct((product) => {
+      //
     });
   }
 }

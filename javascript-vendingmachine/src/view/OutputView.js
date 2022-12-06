@@ -8,6 +8,10 @@ const OutputView = {
     Console.print(`50원 - ${coins[2]}개`);
     Console.print(`10원 - ${coins[3]}개`);
   },
+
+  printRemainingMoney(money) {
+    Console.print(`\n투입 금액: ${money}원`);
+  },
 };
 
 module.exports = OutputView;
