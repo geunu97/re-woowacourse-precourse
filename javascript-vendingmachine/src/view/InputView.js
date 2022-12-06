@@ -12,6 +12,21 @@ const InputView = {
       callback(money);
     });
   },
+
+  readProducts(callback) {
+    Console.readLine('\n상품명과 가격, 수량을 입력해 주세요.\n', (inputData) => {
+      const products = [];
+      inputData.split(';').forEach((product) => {
+        products.push(product.slice(1, -1).split(','));
+      });
+
+      if (Exception.isThrow(InputValidator.products, products)) {
+        this.readProducts(callback);
+        return;
+      }
+      callback(products);
+    });
+  },
 };
 
 module.exports = InputView;

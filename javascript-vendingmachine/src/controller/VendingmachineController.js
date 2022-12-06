@@ -15,6 +15,13 @@ class VendingmachineController {
       );
       this.#coin = new Coin(vendingmachineCoins);
       OutputView.printVendingmachineCoin(this.#coin.getCountingCoins());
+      this.asd();
+    });
+  }
+
+  asd() {
+    InputView.readProducts((products) => {
+      //
     });
   }
 }
