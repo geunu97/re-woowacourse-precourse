@@ -4,13 +4,11 @@ const RandomNumberInListGenerator = require('../RandomNumberInListGenerator');
 const Coin = require('../model/Coin');
 const OutputView = require('../view/OutputView');
 const Product = require('../model/Product');
-const Products = require('../model/Products');
-const User = require('../model/User');
+const Vendingmachine = require('../model/Vendingmachine');
 
 class VendingmachineController {
   #coin;
-  #products;
-  #user;
+  #vendingmachine;
 
   start() {
     this.makeCoins();
@@ -31,26 +29,30 @@ class VendingmachineController {
   makeProducts() {
     InputView.readProducts((products) => {
       const productInstances = products.map((product) => new Product(product));
-      this.#products = new Products(productInstances);
-      this.inputUserMoney();
+      this.makeVendingmachine(productInstances);
     });
   }
 
-  inputUserMoney() {
-    InputView.readUserMoney((money) => {
-      this.#user = new User(money);
-      this.asd();
+  makeVendingmachine(productInstances) {
+    InputView.readUserMoney((userMoney) => {
+      this.#vendingmachine = new Vendingmachine(userMoney, productInstances);
+      this.availablePurchase();
     });
   }
 
-  asd() {
-    OutputView.printRemainingMoney(this.#user.getMoney());
-    this.bbb();
+  availablePurchase() {
+    OutputView.printRemainingMoney(this.#vendingmachine.getUserMoney());
+    if (this.#vendingmachine.availablePurchase() && !this.#vendingmachine.isSoldOut()) {
+      this.purchase();
+      return;
+    }
+    console.log('잔돈');
   }
 
-  bbb() {
+  purchase() {
     InputView.readPurchaseProduct((product) => {
-      //
+      this.#vendingmachine.purchase(product);
+      this.availablePurchase();
     });
   }
 }
