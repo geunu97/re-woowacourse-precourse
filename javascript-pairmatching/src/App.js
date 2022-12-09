@@ -1,5 +1,10 @@
+const PairMatchingController = require('./controller/PairmatchingController');
+
 class App {
-  play() {}
+  play() {
+    const pairMatchingController = new PairMatchingController();
+    pairMatchingController.start();
+  }
 }
 
 module.exports = App;
