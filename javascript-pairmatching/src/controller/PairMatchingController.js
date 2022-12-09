@@ -18,8 +18,14 @@ class PairMatchingController {
     OutputView.printPairMatching();
     InputView.readPairMatching((command) => {
       //
-      FileReader.read('src/resources/backend-crew.md', (crew) => {
-        console.log(PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate));
+      // FileReader.read('src/resources/backend-crew.md', (crew) => {
+      //   const result = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
+      //   OutputView.printBackendPairMatchingResult(result);
+      // });
+
+      FileReader.read('src/resources/frontend-crew.md', (crew) => {
+        const result = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
+        OutputView.printFrontendPairMatchingResult(result);
       });
     });
   }
