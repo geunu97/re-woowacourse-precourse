@@ -36,6 +36,10 @@ class PairMatchingModel {
   getMission() {
     return this.#mission;
   }
+
+  getPairMatchingResult() {
+    return this.#pairMatchingResult;
+  }
 }
 
 module.exports = PairMatchingModel;
