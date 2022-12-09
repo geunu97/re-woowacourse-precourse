@@ -6,16 +6,20 @@ class PairMatchingController {
   #pairMatchingModel;
 
   start() {
+    this.selectFunction();
+  }
+
+  selectFunction() {
     InputView.readFunctionCommand((command) => {
       if (command === '1') {
         this.makerPairMatching();
+        OutputView.printPairMatching();
         return;
       }
     });
   }
 
   makerPairMatching() {
-    OutputView.printPairMatching();
     InputView.readPairMatching(([course, level, mission]) => {
       this.#pairMatchingModel = new PairMatchingModel(course, level, mission);
       this.outputPairMatchingResult(course);
@@ -26,9 +30,11 @@ class PairMatchingController {
     this.#pairMatchingModel.getPairMatchingResult((pairMatchingResult) => {
       if (course === '프론트엔드') {
         OutputView.printFrontendPairMatchingResult(pairMatchingResult);
-        return;
       }
-      OutputView.printBackendPairMatchingResult(pairMatchingResult);
+      if (course === '백엔드') {
+        OutputView.printBackendPairMatchingResult(pairMatchingResult);
+      }
+      this.selectFunction();
     });
   }
 }

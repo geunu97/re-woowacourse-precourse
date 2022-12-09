@@ -8,6 +8,7 @@ const OutputView = {
   },
 
   printFrontendPairMatchingResult(crew) {
+    Console.print('\n페어 매칭 결과입니다.');
     for (let index = 0; index < crew.length - 3; index += 2) {
       Console.print(crew.slice(index, index + 2).join(' : '));
     }
@@ -15,6 +16,7 @@ const OutputView = {
   },
 
   printBackendPairMatchingResult(crew) {
+    Console.print('\n페어 매칭 결과입니다.');
     for (let index = 0; index < crew.length; index += 2) {
       Console.print(crew.slice(index, index + 2).join(' : '));
     }
