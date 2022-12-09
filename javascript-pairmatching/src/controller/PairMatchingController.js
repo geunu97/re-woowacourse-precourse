@@ -3,6 +3,7 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const PairMatchingModel = require('../model/PairMatchingModel');
 const PairMatchingModels = require('../model/PairMatchingModels');
+const Exception = require('../utils/Exception');
 
 class PairMatchingController {
   #pairMatchingModels;
@@ -53,7 +54,16 @@ class PairMatchingController {
   }
 
   searchResult(course) {
-    this.outputResult(course, this.#targetPairMatchingModel.getPairMatchingResult());
+    try {
+      if (!this.#targetPairMatchingModel) {
+        Exception.throw('[ERROR] 매칭 이력이 없습니다.');
+        return;
+      }
+      this.outputResult(course, this.#targetPairMatchingModel.getPairMatchingResult());
+    } catch (error) {
+      Console.print(error);
+      this.inputPairMatchingInfo('2');
+    }
   }
 
   outputResult(course, pairMatchingResult) {
