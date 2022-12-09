@@ -5,39 +5,23 @@ class PairMatchingModels {
     this.#pairMatchingModels.push(pairMatchingModel);
   }
 
-  getPairMatchingResult(course, level, mission, callback) {
+  getPairMatchingModel(course, level, mission) {
+    let targetPairMatchingModel;
     this.#pairMatchingModels.forEach((pairMatchingModel) => {
-      if (pairMatchingModel.getCourse() !== course) {
-        return;
+      if (
+        pairMatchingModel.getCourse() === course &&
+        pairMatchingModel.getLevel() === level &&
+        pairMatchingModel.getMission() === mission
+      ) {
+        targetPairMatchingModel = pairMatchingModel;
       }
-      if (pairMatchingModel.getLevel() !== level) {
-        return;
-      }
-      if (pairMatchingModel.getMission() !== mission) {
-        return;
-      }
-      pairMatchingModel.generatePairMatchingResult(callback);
     });
+    return targetPairMatchingModel;
   }
 
-  isExistingMatchingResult(course, level, mission) {
-    let existence = false;
-    this.#pairMatchingModels.forEach((pairMatchingModel) => {
-      if (pairMatchingModel.getCourse() !== course) {
-        return;
-      }
-      if (pairMatchingModel.getLevel() !== level) {
-        return;
-      }
-      if (pairMatchingModel.getMission() !== mission) {
-        return;
-      }
-      existence = true;
-    });
-    return existence;
+  getPairMatchingResult(pairMatchingModel, callback) {
+    pairMatchingModel.generatePairMatchingResult(callback);
   }
-
-  updateMatching() {}
 }
 
 module.exports = PairMatchingModels;
