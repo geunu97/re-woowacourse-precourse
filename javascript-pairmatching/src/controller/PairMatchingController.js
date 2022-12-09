@@ -1,9 +1,14 @@
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const PairMatchingModel = require('../model/PairMatchingModel');
+const PairMatchingModels = require('../model/PairMatchingModels');
 
 class PairMatchingController {
-  #pairMatchingModel;
+  #pairMatchingModels;
+
+  constructor() {
+    this.#pairMatchingModels = new PairMatchingModels();
+  }
 
   start() {
     this.selectFunction();
@@ -21,13 +26,13 @@ class PairMatchingController {
 
   makerPairMatching() {
     InputView.readPairMatching(([course, level, mission]) => {
-      this.#pairMatchingModel = new PairMatchingModel(course, level, mission);
-      this.outputPairMatchingResult(course);
+      this.#pairMatchingModels.setPairMatchingModels(new PairMatchingModel(course, level, mission));
+      this.outputPairMatchingResult(course, level, mission);
     });
   }
 
-  outputPairMatchingResult(course) {
-    this.#pairMatchingModel.getPairMatchingResult((pairMatchingResult) => {
+  outputPairMatchingResult(course, level, mission) {
+    this.#pairMatchingModels.getPairMatchingResult(course, level, mission, (pairMatchingResult) => {
       if (course === '프론트엔드') {
         OutputView.printFrontendPairMatchingResult(pairMatchingResult);
       }

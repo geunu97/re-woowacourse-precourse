@@ -24,6 +24,18 @@ class PairMatchingModel {
       callback(PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate));
     });
   }
+
+  getCourse() {
+    return this.#course;
+  }
+
+  getLevel() {
+    return this.#level;
+  }
+
+  getMission() {
+    return this.#mission;
+  }
 }
 
 module.exports = PairMatchingModel;
