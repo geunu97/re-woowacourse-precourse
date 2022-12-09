@@ -17,22 +17,26 @@ class PairMatchingController {
   selectFunction() {
     InputView.readFunctionCommand((command) => {
       if (command === '1') {
-        this.makerPairMatching();
         OutputView.printPairMatching();
+        this.inputPairMatching();
         return;
       }
     });
   }
 
-  makerPairMatching() {
+  inputPairMatching() {
     InputView.readPairMatching(([course, level, mission]) => {
       if (this.#pairMatchingModels.isExistingMatchingResult(course, level, mission)) {
-        this.inputReMatching();
+        this.inputRePairMatching();
         return;
       }
-      this.#pairMatchingModels.setPairMatchingModels(new PairMatchingModel(course, level, mission));
-      this.outputPairMatchingResult(course, level, mission);
+      this.generatePairMatching(course, level, mission);
     });
+  }
+
+  generatePairMatching(course, level, mission) {
+    this.#pairMatchingModels.setPairMatchingModels(new PairMatchingModel(course, level, mission));
+    this.outputPairMatchingResult(course, level, mission);
   }
 
   outputPairMatchingResult(course, level, mission) {
@@ -47,10 +51,10 @@ class PairMatchingController {
     });
   }
 
-  inputReMatching() {
+  inputRePairMatching() {
     InputView.readReMatching((command) => {
       if (command === '아니오') {
-        this.makerPairMatching();
+        this.inputPairMatching();
         return;
       }
       /////////////// 매칭 결과를 저장해야 되는데?

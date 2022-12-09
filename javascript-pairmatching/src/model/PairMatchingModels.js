@@ -16,7 +16,7 @@ class PairMatchingModels {
       if (pairMatchingModel.getMission() !== mission) {
         return;
       }
-      pairMatchingModel.getPairMatchingResult(callback);
+      pairMatchingModel.generatePairMatchingResult(callback);
     });
   }
 

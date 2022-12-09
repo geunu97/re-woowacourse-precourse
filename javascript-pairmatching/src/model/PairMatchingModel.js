@@ -6,6 +6,7 @@ class PairMatchingModel {
   #course;
   #level;
   #mission;
+  #pairMatchingResult;
 
   constructor(course, level, mission) {
     this.#course = course;
@@ -13,15 +14,14 @@ class PairMatchingModel {
     this.#mission = mission;
   }
 
-  getPairMatchingResult(callback) {
+  generatePairMatchingResult(callback) {
+    let src = 'src/resources/backend-crew.md';
     if (this.#course === '프론트엔드') {
-      FileReader.read('src/resources/frontend-crew.md', (crew) => {
-        callback(PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate));
-      });
-      return;
+      src = 'src/resources/frontend-crew.md';
     }
-    FileReader.read('src/resources/backend-crew.md', (crew) => {
-      callback(PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate));
+    FileReader.read(src, (crew) => {
+      this.#pairMatchingResult = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
+      callback(this.#pairMatchingResult);
     });
   }
 
