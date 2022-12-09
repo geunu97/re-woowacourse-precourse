@@ -8,25 +8,27 @@ class PairMatchingController {
   start() {
     InputView.readFunctionCommand((command) => {
       if (command === '1') {
-        this.pairMatching();
+        this.inputPairMatching();
         return;
       }
     });
   }
 
-  pairMatching() {
+  inputPairMatching() {
     OutputView.printPairMatching();
-    InputView.readPairMatching((command) => {
-      //
-      // FileReader.read('src/resources/backend-crew.md', (crew) => {
-      //   const result = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
-      //   OutputView.printBackendPairMatchingResult(result);
-      // });
+    InputView.readPairMatching(([course, level, mission]) => {
+      if (course === '프론트엔드') {
+        this.aaa('src/resources/frontend-crew.md', OutputView.printFrontendPairMatchingResult);
+        return;
+      }
+      this.aaa('src/resources/backend-crew.md', OutputView.printBackendPairMatchingResult);
+    });
+  }
 
-      FileReader.read('src/resources/frontend-crew.md', (crew) => {
-        const result = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
-        OutputView.printFrontendPairMatchingResult(result);
-      });
+  aaa(src, print) {
+    FileReader.read(src, (crew) => {
+      const pairMatching = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
+      print(pairMatching);
     });
   }
 }
