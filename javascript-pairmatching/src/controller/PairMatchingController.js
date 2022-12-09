@@ -26,6 +26,10 @@ class PairMatchingController {
 
   makerPairMatching() {
     InputView.readPairMatching(([course, level, mission]) => {
+      if (this.#pairMatchingModels.isExistingMatchingResult(course, level, mission)) {
+        this.inputReMatching();
+        return;
+      }
       this.#pairMatchingModels.setPairMatchingModels(new PairMatchingModel(course, level, mission));
       this.outputPairMatchingResult(course, level, mission);
     });
@@ -40,6 +44,16 @@ class PairMatchingController {
         OutputView.printBackendPairMatchingResult(pairMatchingResult);
       }
       this.selectFunction();
+    });
+  }
+
+  inputReMatching() {
+    InputView.readReMatching((command) => {
+      if (command === '아니오') {
+        this.makerPairMatching();
+        return;
+      }
+      /////////////// 매칭 결과를 저장해야 되는데?
     });
   }
 }
