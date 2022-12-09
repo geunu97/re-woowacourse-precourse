@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const PairMatchingModel = require('../model/PairMatchingModel');
@@ -23,10 +24,10 @@ class PairMatchingController {
         return;
       }
       if (command === '3') {
-        this.#pairMatchingModels.delete();
-        OutputView.printDelete();
-        this.selectFunction();
+        this.deleteResult();
+        return;
       }
+      this.end();
     });
   }
 
@@ -86,7 +87,15 @@ class PairMatchingController {
     this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
   }
 
-  clearResult() {}
+  deleteResult() {
+    this.#pairMatchingModels.delete();
+    OutputView.printDelete();
+    this.selectFunction();
+  }
+
+  end() {
+    Console.close();
+  }
 }
 
 module.exports = PairMatchingController;
