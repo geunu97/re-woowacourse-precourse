@@ -1,34 +1,34 @@
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const FileReader = require('../utils/FileReader');
-const PairMatchingMaker = require('../utils/PairMatchingMaker');
-const ShuffleGenerator = require('../utils/ShuffleGenerator');
+const PairMatchingModel = require('../model/PairMatchingModel');
 
 class PairMatchingController {
+  #pairMatchingModel;
+
   start() {
     InputView.readFunctionCommand((command) => {
       if (command === '1') {
-        this.inputPairMatching();
+        this.makerPairMatching();
         return;
       }
     });
   }
 
-  inputPairMatching() {
+  makerPairMatching() {
     OutputView.printPairMatching();
     InputView.readPairMatching(([course, level, mission]) => {
-      if (course === '프론트엔드') {
-        this.aaa('src/resources/frontend-crew.md', OutputView.printFrontendPairMatchingResult);
-        return;
-      }
-      this.aaa('src/resources/backend-crew.md', OutputView.printBackendPairMatchingResult);
+      this.#pairMatchingModel = new PairMatchingModel(course, level, mission);
+      this.outputPairMatchingResult(course);
     });
   }
 
-  aaa(src, print) {
-    FileReader.read(src, (crew) => {
-      const pairMatching = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
-      print(pairMatching);
+  outputPairMatchingResult(course) {
+    this.#pairMatchingModel.getPairMatchingResult((pairMatchingResult) => {
+      if (course === '프론트엔드') {
+        OutputView.printFrontendPairMatchingResult(pairMatchingResult);
+        return;
+      }
+      OutputView.printBackendPairMatchingResult(pairMatchingResult);
     });
   }
 }
