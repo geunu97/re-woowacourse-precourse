@@ -19,26 +19,26 @@ class PairMatchingController {
     InputView.readFunctionCommand((command) => {
       if (command === '1' || command === '2') {
         OutputView.printPairMatching();
-        this.inputPairMatching(command);
+        this.inputPairMatchingInfo(command);
         return;
       }
     });
   }
 
-  inputPairMatching(command) {
+  inputPairMatchingInfo(command) {
     InputView.readPairMatching(([course, level, mission]) => {
-      this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
+      this.setTargetPairMatchingModel(course, level, mission);
       if (command === '1') {
         this.pairMatching(course, level, mission);
         return;
       }
-      this.searchPairMatchingResult(course, level, mission);
+      this.searchResult(course);
     });
   }
 
   pairMatching(course, level, mission) {
     if (this.#targetPairMatchingModel) {
-      this.inputRePairMatchingCommand(course);
+      this.selectRePairMatching(course);
       return;
     }
     this.#targetPairMatchingModel = new PairMatchingModel(course, level, mission);
@@ -46,12 +46,11 @@ class PairMatchingController {
     this.generatePairMatching(course);
   }
 
-  searchPairMatchingResult(course, level, mission) {
-    this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
-    this.outputPairMatchingResult(course, this.#targetPairMatchingModel.getPairMatchingResult());
+  searchResult(course) {
+    this.outputResult(course, this.#targetPairMatchingModel.getPairMatchingResult());
   }
 
-  outputPairMatchingResult(course, pairMatchingResult) {
+  outputResult(course, pairMatchingResult) {
     if (course === '프론트엔드') {
       OutputView.printFrontendPairMatchingResult(pairMatchingResult);
     }
@@ -63,19 +62,23 @@ class PairMatchingController {
 
   generatePairMatching(course) {
     this.#targetPairMatchingModel.generatePairMatching((pairMatchingResult) => {
-      this.outputPairMatchingResult(course, pairMatchingResult);
+      this.outputResult(course, pairMatchingResult);
       this.selectFunction();
     });
   }
 
-  inputRePairMatchingCommand(course) {
+  selectRePairMatching(course) {
     InputView.readReMatching((command) => {
       if (command === '아니오') {
-        this.inputPairMatching('1');
+        this.inputPairMatchingInfo('1');
         return;
       }
       this.generatePairMatching(course);
     });
+  }
+
+  setTargetPairMatchingModel(course, level, mission) {
+    this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
   }
 }
 
