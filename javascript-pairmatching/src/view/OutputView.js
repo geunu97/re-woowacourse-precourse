@@ -21,6 +21,10 @@ const OutputView = {
       Console.print(crew.slice(index, index + 2).join(' : '));
     }
   },
+
+  printDelete() {
+    Console.print('\n초기화 되었습니다.\n');
+  },
 };
 
 module.exports = OutputView;

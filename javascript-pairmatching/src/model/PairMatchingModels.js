@@ -18,6 +18,10 @@ class PairMatchingModels {
     });
     return targetPairMatchingModel;
   }
+
+  delete() {
+    this.#pairMatchingModels = [];
+  }
 }
 
 module.exports = PairMatchingModels;

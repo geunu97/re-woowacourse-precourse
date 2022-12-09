@@ -22,6 +22,11 @@ class PairMatchingController {
         this.inputPairMatchingInfo(command);
         return;
       }
+      if (command === '3') {
+        this.#pairMatchingModels.delete();
+        OutputView.printDelete();
+        this.selectFunction();
+      }
     });
   }
 
@@ -80,6 +85,8 @@ class PairMatchingController {
   setTargetPairMatchingModel(course, level, mission) {
     this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
   }
+
+  clearResult() {}
 }
 
 module.exports = PairMatchingController;
