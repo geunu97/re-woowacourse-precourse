@@ -18,10 +18,6 @@ class PairMatchingModels {
     });
     return existence;
   }
-
-  getPairMatchingResult(pairMatchingModel, callback) {
-    pairMatchingModel.generatePairMatchingResult(callback);
-  }
 }
 
 module.exports = PairMatchingModels;

@@ -14,7 +14,7 @@ class PairMatchingModel {
     this.#mission = mission;
   }
 
-  generatePairMatchingResult(callback) {
+  generatePairMatching(callback) {
     let src = 'src/resources/backend-crew.md';
     if (this.#course === '프론트엔드') {
       src = 'src/resources/frontend-crew.md';

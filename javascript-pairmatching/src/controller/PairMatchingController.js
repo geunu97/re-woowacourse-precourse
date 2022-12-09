@@ -31,20 +31,14 @@ class PairMatchingController {
         this.inputRePairMatchingCommand();
         return;
       }
-      this.generatePairMatching(course, level, mission);
+      this.#targetPairMatchingModel = new PairMatchingModel(course, level, mission);
+      this.#pairMatchingModels.setPairMatchingModels(this.#targetPairMatchingModel);
+      this.generatePairMatching(course);
     });
   }
 
-  generatePairMatching(course, level, mission) {
-    this.#targetPairMatchingModel = new PairMatchingModel(course, level, mission);
-    this.#pairMatchingModels.setPairMatchingModels(this.#targetPairMatchingModel);
-    this.outputPairMatchingResult(course);
-  }
-
-  // updatePairMatchingResult(course) {}
-
-  outputPairMatchingResult(course) {
-    this.#pairMatchingModels.getPairMatchingResult(this.#targetPairMatchingModel, (pairMatchingResult) => {
+  generatePairMatching(course) {
+    this.#targetPairMatchingModel.generatePairMatching((pairMatchingResult) => {
       if (course === '프론트엔드') {
         OutputView.printFrontendPairMatchingResult(pairMatchingResult);
       }
@@ -55,12 +49,15 @@ class PairMatchingController {
     });
   }
 
+  // updatePairMatchingResult(course) {}
+
   inputRePairMatchingCommand() {
     InputView.readReMatching((command) => {
       if (command === '아니오') {
         this.inputPairMatching();
         return;
       }
+
       //this.updatePairMatchingResult(course);
       /////////////// 매칭 결과를 저장해야 되는데?
       /////////////// crew 불러오는거 저장?
