@@ -5,6 +5,7 @@ const PairMatchingModels = require('../model/PairMatchingModels');
 
 class PairMatchingController {
   #pairMatchingModels;
+  #targetPairMatchingModel;
 
   constructor() {
     this.#pairMatchingModels = new PairMatchingModels();
@@ -26,8 +27,8 @@ class PairMatchingController {
 
   inputPairMatching() {
     InputView.readPairMatching(([course, level, mission]) => {
-      if (this.#pairMatchingModels.getPairMatchingModel(course, level, mission)) {
-        this.inputRePairMatchingCommand(course);
+      if (this.#pairMatchingModels.isExistingPairMatchingModel(course, level, mission)) {
+        this.inputRePairMatchingCommand();
         return;
       }
       this.generatePairMatching(course, level, mission);
@@ -35,16 +36,15 @@ class PairMatchingController {
   }
 
   generatePairMatching(course, level, mission) {
-    this.#pairMatchingModels.setPairMatchingModels(new PairMatchingModel(course, level, mission));
-    this.outputPairMatchingResult(course, level, mission);
+    this.#targetPairMatchingModel = new PairMatchingModel(course, level, mission);
+    this.#pairMatchingModels.setPairMatchingModels(this.#targetPairMatchingModel);
+    this.outputPairMatchingResult(course);
   }
 
   // updatePairMatchingResult(course) {}
 
-  outputPairMatchingResult(course, level, mission) {
-    const pairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
-
-    this.#pairMatchingModels.getPairMatchingResult(pairMatchingModel, (pairMatchingResult) => {
+  outputPairMatchingResult(course) {
+    this.#pairMatchingModels.getPairMatchingResult(this.#targetPairMatchingModel, (pairMatchingResult) => {
       if (course === '프론트엔드') {
         OutputView.printFrontendPairMatchingResult(pairMatchingResult);
       }
@@ -55,7 +55,7 @@ class PairMatchingController {
     });
   }
 
-  inputRePairMatchingCommand(course) {
+  inputRePairMatchingCommand() {
     InputView.readReMatching((command) => {
       if (command === '아니오') {
         this.inputPairMatching();

@@ -5,18 +5,18 @@ class PairMatchingModels {
     this.#pairMatchingModels.push(pairMatchingModel);
   }
 
-  getPairMatchingModel(course, level, mission) {
-    let targetPairMatchingModel;
+  isExistingPairMatchingModel(course, level, mission) {
+    let existence = false;
     this.#pairMatchingModels.forEach((pairMatchingModel) => {
       if (
         pairMatchingModel.getCourse() === course &&
         pairMatchingModel.getLevel() === level &&
         pairMatchingModel.getMission() === mission
       ) {
-        targetPairMatchingModel = pairMatchingModel;
+        existence = true;
       }
     });
-    return targetPairMatchingModel;
+    return existence;
   }
 
   getPairMatchingResult(pairMatchingModel, callback) {
