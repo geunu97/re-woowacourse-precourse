@@ -33,7 +33,7 @@ class PairMatchingController {
   }
 
   inputPairMatchingInfo(command) {
-    InputView.readPairMatching(([course, level, mission]) => {
+    InputView.readPairMatchingInfo(([course, level, mission]) => {
       this.setTargetPairMatchingModel(course, level, mission);
       if (command === '1') {
         this.pairMatching(course, level, mission);
