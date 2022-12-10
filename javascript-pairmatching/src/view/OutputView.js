@@ -9,17 +9,17 @@ const OutputView = {
 
   printFrontendPairMatchingResult(crew) {
     Console.print('\n페어 매칭 결과입니다.');
-    for (let index = 0; index < crew.length - 3; index += 2) {
-      Console.print(crew.slice(index, index + 2).join(' : '));
-    }
-    Console.print(crew.slice(crew.length - 3).join(' : '));
+    crew.slice(0, -2).forEach((pair) => {
+      Console.print(pair.join(' : '));
+    });
+    Console.print([...crew[crew.length - 2], crew[crew.length - 1][0]].join(' : '));
   },
 
   printBackendPairMatchingResult(crew) {
     Console.print('\n페어 매칭 결과입니다.');
-    for (let index = 0; index < crew.length; index += 2) {
-      Console.print(crew.slice(index, index + 2).join(' : '));
-    }
+    crew.forEach((pair) => {
+      Console.print(pair.join(' : '));
+    });
   },
 
   printDelete() {
