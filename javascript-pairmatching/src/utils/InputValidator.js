@@ -34,6 +34,10 @@ const InputValidator = {
       '배포',
     ]);
   },
+
+  reMatching(value) {
+    Validator.existingValue(value, ['네', '아니오']);
+  },
 };
 
 module.exports = InputValidator;
