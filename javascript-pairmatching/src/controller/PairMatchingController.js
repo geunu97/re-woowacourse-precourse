@@ -59,7 +59,7 @@ class PairMatchingController {
         Exception.throw('[ERROR] 매칭 이력이 없습니다.');
         return;
       }
-      this.outputResult(course, this.#targetPairMatchingModel.getPairMatchingResult());
+      this.outputResult(course, this.#targetPairMatchingModel.getResult().getCurrentResult());
     } catch (error) {
       Console.print(error);
       this.inputPairMatchingInfo('2');

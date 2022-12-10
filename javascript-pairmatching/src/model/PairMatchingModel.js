@@ -1,28 +1,47 @@
 const PairMatchingMaker = require('../utils/PairMatchingMaker');
 const FileReader = require('../utils/FileReader');
 const ShuffleGenerator = require('../utils/ShuffleGenerator');
+const PairMatchingResults = require('./PairMatchingResults');
+const Exception = require('../utils/Exception');
+const { Console } = require('@woowacourse/mission-utils');
 
 class PairMatchingModel {
   #course;
   #level;
   #mission;
-  #pairMatchingResult;
+  #result;
 
   constructor(course, level, mission) {
     this.#course = course;
     this.#level = level;
     this.#mission = mission;
+    this.#result = new PairMatchingResults();
   }
 
   generatePairMatching(callback) {
-    let src = 'src/resources/backend-crew.md';
-    if (this.#course === '프론트엔드') {
-      src = 'src/resources/frontend-crew.md';
-    }
-    FileReader.read(src, (crew) => {
-      this.#pairMatchingResult = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
-      callback(this.#pairMatchingResult);
+    FileReader.read(this.getFileSrc(), (crew) => {
+      let count = 0;
+      while (true) {
+        const result = PairMatchingMaker.make(crew.split('\r\n'), ShuffleGenerator.generate);
+        if (!this.#result.isExistingResult(result, this.#level)) {
+          this.#result.setCurrentResult(result);
+          this.#result.setResults(this.#level);
+          callback(this.#result.getCurrentResult());
+          break;
+        }
+      }
+      if (count > 3) {
+        Console.print('[ERROR] 매칭에 실패하였습니다.');
+        Exception.throw('[ERROR] 매칭에 실패하였습니다.');
+      }
     });
+  }
+
+  getFileSrc() {
+    if (this.#course === '프론트엔드') {
+      return 'src/resources/frontend-crew.md';
+    }
+    return 'src/resources/backend-crew.md';
   }
 
   getCourse() {
@@ -37,8 +56,8 @@ class PairMatchingModel {
     return this.#mission;
   }
 
-  getPairMatchingResult() {
-    return this.#pairMatchingResult;
+  getResult() {
+    return this.#result;
   }
 }
 
