@@ -1,9 +1,12 @@
-const PairMatchingController = require('./controller/PairmatchingController');
+const MainController = require('./controller/MainController');
 
 class App {
+  constructor() {
+    this.mainController = new MainController();
+  }
+
   play() {
-    const pairMatchingController = new PairMatchingController();
-    pairMatchingController.start();
+    this.mainController.selectFunction();
   }
 }
 

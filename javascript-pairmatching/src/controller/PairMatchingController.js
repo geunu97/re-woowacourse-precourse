@@ -1,110 +1,48 @@
-const { Console } = require('@woowacourse/mission-utils');
+const PairMatchingGameModel = require('../model/PairMatchingGameModel');
 const InputView = require('../view/InputView');
-const OutputView = require('../view/OutputView');
-const PairMatchingModel = require('../model/PairMatchingModel');
-const PairMatchingModels = require('../model/PairMatchingModels');
-const Exception = require('../utils/Exception');
 
 class PairMatchingController {
-  #pairMatchingModels;
-  #targetPairMatchingModel;
+  #mainController;
+  #pairMatchingGameModels;
+  #targetModel;
 
-  constructor() {
-    this.#pairMatchingModels = new PairMatchingModels();
+  constructor(mainController, pairMatchingGameModels, targetModel) {
+    this.#mainController = mainController;
+    this.#pairMatchingGameModels = pairMatchingGameModels;
+    this.#targetModel = targetModel;
   }
 
-  start() {
-    this.selectFunction();
+  isExisting(course) {
+    if (this.#targetModel.getModel()) {
+      this.selectRegenerate(course);
+      return true;
+    }
+    return false;
   }
 
-  selectFunction() {
-    InputView.readFunctionCommand((command) => {
-      if (command === '1' || command === '2') {
-        OutputView.printPairMatching();
-        this.inputPairMatchingInfo(command);
-        return;
-      }
-      if (command === '3') {
-        this.deleteResult();
-        return;
-      }
-      this.end();
+  makeModel(course, level, mission) {
+    if (!this.isExisting(course)) {
+      this.#pairMatchingGameModels.setModels(new PairMatchingGameModel(course, level, mission));
+      this.#targetModel.setModel(course, level, mission);
+      this.generate(course);
+    }
+  }
+
+  generate(course) {
+    this.#targetModel.getModel().generatePairMatching((pairMatchingResult) => {
+      this.#mainController.outputResult(course, pairMatchingResult);
+      this.#mainController.selectFunction();
     });
   }
 
-  inputPairMatchingInfo(command) {
-    InputView.readPairMatchingInfo(([course, level, mission]) => {
-      this.setTargetPairMatchingModel(course, level, mission);
-      if (command === '1') {
-        this.pairMatching(course, level, mission);
-        return;
-      }
-      this.searchResult(course);
-    });
-  }
-
-  pairMatching(course, level, mission) {
-    if (this.#targetPairMatchingModel) {
-      this.selectRePairMatching(course);
-      return;
-    }
-    this.#targetPairMatchingModel = new PairMatchingModel(course, level, mission);
-    this.#pairMatchingModels.setPairMatchingModels(this.#targetPairMatchingModel);
-    this.generatePairMatching(course);
-  }
-
-  searchResult(course) {
-    try {
-      if (!this.#targetPairMatchingModel) {
-        Exception.throw('[ERROR] 매칭 이력이 없습니다.');
-        return;
-      }
-      this.outputResult(course, this.#targetPairMatchingModel.getResult().getCurrentResult());
-    } catch (error) {
-      Console.print(error);
-      this.inputPairMatchingInfo('2');
-    }
-  }
-
-  outputResult(course, pairMatchingResult) {
-    if (course === '프론트엔드') {
-      OutputView.printFrontendPairMatchingResult(pairMatchingResult);
-    }
-    if (course === '백엔드') {
-      OutputView.printBackendPairMatchingResult(pairMatchingResult);
-    }
-    this.selectFunction();
-  }
-
-  generatePairMatching(course) {
-    this.#targetPairMatchingModel.generatePairMatching((pairMatchingResult) => {
-      this.outputResult(course, pairMatchingResult);
-      this.selectFunction();
-    });
-  }
-
-  selectRePairMatching(course) {
+  selectRegenerate(course) {
     InputView.readReMatching((command) => {
       if (command === '아니오') {
-        this.inputPairMatchingInfo('1');
+        this.#mainController.inputPairMatchingInfo('1');
         return;
       }
-      this.generatePairMatching(course);
+      this.generate(course);
     });
-  }
-
-  setTargetPairMatchingModel(course, level, mission) {
-    this.#targetPairMatchingModel = this.#pairMatchingModels.getPairMatchingModel(course, level, mission);
-  }
-
-  deleteResult() {
-    this.#pairMatchingModels.delete();
-    OutputView.printDelete();
-    this.selectFunction();
-  }
-
-  end() {
-    Console.close();
   }
 }
 

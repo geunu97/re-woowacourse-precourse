@@ -1,4 +1,4 @@
-class PairMatchingResults {
+class Results {
   #results = [];
   #currentResult;
 
@@ -40,4 +40,4 @@ class PairMatchingResults {
   }
 }
 
-module.exports = PairMatchingResults;
+module.exports = Results;

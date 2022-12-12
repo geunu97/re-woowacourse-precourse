@@ -1,11 +1,11 @@
+const { Console } = require('@woowacourse/mission-utils');
 const PairMatchingMaker = require('../utils/PairMatchingMaker');
 const FileReader = require('../utils/FileReader');
 const ShuffleGenerator = require('../utils/ShuffleGenerator');
-const PairMatchingResults = require('./PairMatchingResults');
+const Results = require('./Results');
 const Exception = require('../utils/Exception');
-const { Console } = require('@woowacourse/mission-utils');
 
-class PairMatchingModel {
+class PairMatchingGameModel {
   #course;
   #level;
   #mission;
@@ -15,7 +15,7 @@ class PairMatchingModel {
     this.#course = course;
     this.#level = level;
     this.#mission = mission;
-    this.#result = new PairMatchingResults();
+    this.#result = new Results();
   }
 
   generatePairMatching(callback) {
@@ -61,4 +61,4 @@ class PairMatchingModel {
   }
 }
 
-module.exports = PairMatchingModel;
+module.exports = PairMatchingGameModel;
